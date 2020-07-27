@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Premium Calculator</title>
+    <link rel="stylesheet" href="css/site.css" />
+</head>
+<body>
+    <h1>Premium Calculator</h1>
+
+    <form action="javascript:void(0);" method="GET" onsubmit="setPremiumValue()">
+
+        <div>
+            <label for="txtDateOfBirth" class="label-param">Date of Birth</label>
+            <input type="date" id="txtDateOfBirth" name="txtDateOfBirth" onchange="setAge()" class="input" required>
+        </div>
+        
+        <br />
+        <div>
+            <label for="txtState" class="label-param">State</label>
+            <input type="text" id="txtState" name="txtState" class="input" required>
+        </div>
+
+        <br />
+        <div>
+            <label for="txtAge" class="label-param">Age</label>
+            <input type="text" id="txtAge" name="txtAge" class="input" readonly>
+        </div>
+                
+        <br />
+
+        <div style="display:inline-block;">
+            <input type="submit" id="btnGetValue" value="Get Value" class="button input">
+            <input type="text" id="txtPremiumValue" class="input" readonly>
+
+            <select id="dropFrequency" onchange="setPeriodAmounts()" class="input">
+                <option value="M">Monthly</option>
+                <option value="Q">Quarterly</option>
+                <option value="S">Semi-Annually</option>
+                <option value="A">Annually</option>
+            </select>
+        </div>
+
+        <div style="display:inline-block; vertical-align:top;">
+            <label for="txtAnnuallyValue" class="label-result">Annualy</label>
+            <input type="text" id="txtAnnuallyValue" class="input" readonly>
+
+            <br />
+
+            <label for="txtMonthlyValue" class="label-result">Monthly</label>
+            <input type="text" id="txtMonthlyValue" class="input" readonly>
+        </div>
+
+    </form>
+
+    <script src="js/site.js" asp-append-version="true"></script>
+    <script src="js/common/constants.js" asp-append-version="true"></script>
+</body>
+</html>

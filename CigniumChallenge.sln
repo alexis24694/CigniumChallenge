@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30002.166
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PremiumCalculatorApi", "PremiumCalculatorApi\PremiumCalculatorApi.csproj", "{72AFC24C-91F2-4548-9680-B1CFABA33326}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PremiumCalculatorSite", "PremiumCalculatorSite\PremiumCalculatorSite.csproj", "{49BDB38A-9398-44A5-A10D-202926C0EF79}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{72AFC24C-91F2-4548-9680-B1CFABA33326}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72AFC24C-91F2-4548-9680-B1CFABA33326}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72AFC24C-91F2-4548-9680-B1CFABA33326}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72AFC24C-91F2-4548-9680-B1CFABA33326}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49BDB38A-9398-44A5-A10D-202926C0EF79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49BDB38A-9398-44A5-A10D-202926C0EF79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49BDB38A-9398-44A5-A10D-202926C0EF79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49BDB38A-9398-44A5-A10D-202926C0EF79}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5BD08527-0675-40DF-970F-527EB11C09FF}
+	EndGlobalSection
+EndGlobal
