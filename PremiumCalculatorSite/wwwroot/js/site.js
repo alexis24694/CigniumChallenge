@@ -10,7 +10,8 @@ function setPremiumValue() {
     const state = txtState.value;
     const age = txtAge.value;
 
-    validatePremiumRuleParameters(dateOfBirth, state, age);
+    if (!validatePremiumRuleParameters(dateOfBirth, state, age))
+        return;
 
     //Setting queryString parameters
     params = { dateOfBirth: dateOfBirth, state: state, age: age };
@@ -31,25 +32,40 @@ function setPremiumValue() {
             }
             else {
                 clearControls();
-                handleError(data);
-            }                
-    })
-    .catch(error => handleError('There was an error processing the request: ' + error));
+                if (data.errors)
+                    handleRequestFormatError(data.errors);
+                else
+                    handleError(data);
+            }
+        })
+        .catch(error => handleError('There was an error processing the request: ' + error));
 }
 
 function validatePremiumRuleParameters(dateOfBirth, state, age) {
-    if (!validateDateFormat(dateOfBirth))
+    if (!validateDateFormat(dateOfBirth)) {
         handleError('Invalid date format');
-    if (!validateAgeFormat(age))
+        return false;
+    }
+
+    if (!validateAgeFormat(age)) {
         handleError('Invalid age format');
-    if (!validateAgeWithBirthDate(dateOfBirth, parseInt(age)))
+        return false;
+    }
+
+    if (!validateAgeWithBirthDate(dateOfBirth, parseInt(age))) {
         handleError('Age does not match birth date');
-    if (!validateStateFormat(state))
+        return false;
+    }
+
+    if (!validateStateFormat(state)) {
         handleError('Invalid state code format');
+        return false;
+    }
+    return true;
 }
 
 //Validate the format of the dateString (YYYY-MM-DD)
-function validateDateFormat(dateString) {    
+function validateDateFormat(dateString) {
     const dateformat = /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])/; //YYYY-MM-DD Regex
     return dateString && dateString.match(dateformat);
 }
@@ -74,7 +90,7 @@ function validateStateFormat(state) {
 function setPeriodAmounts() {
     const txtPremiumValue = document.getElementById('txtPremiumValue');
     if (txtPremiumValue.value) {
-        const premiumAmount = parseFloat(txtPremiumValue.value);    
+        const premiumAmount = parseFloat(txtPremiumValue.value);
         const frequencyCode = document.getElementById('dropFrequency').value;
         let frequencyObject = Object.values(Frequency).find(f => f.Code === frequencyCode)
 
@@ -86,13 +102,13 @@ function setPeriodAmounts() {
             setAmount(premiumAmount, 'txtMonthlyValue', payments, Frequency.Monthly.Payments);
         } else {
             handleError('No Payment info configured');
-        }  
-    }  
+        }
+    }
 }
 
 function setAmount(premiumAmount, inputId, payments, paymentFrequency) {
     let inputElement = document.getElementById(inputId);
-    inputElement.value = premiumAmount * payments / paymentFrequency;    
+    inputElement.value = parseFloat(premiumAmount * payments / paymentFrequency).toFixed(2);
 }
 
 //Setting the age input value when the date is selected, only if its a valid date
@@ -105,9 +121,10 @@ function setAge() {
             let txtPremiumValue = document.getElementById('txtAge');
             txtPremiumValue.value = age;
         } else {
-            handleError('Please enter a valid date');
-        }        
-    }           
+            clearAgeControl();
+            handleError('Please enter a valid date. It cannot be higher than today date');
+        }
+    }
 }
 
 function getAgeFromDate(date) {
@@ -126,7 +143,21 @@ function clearControls() {
     txtMonthlyValue.value = '';
 }
 
+function clearAgeControl() {
+    let txtAge = document.getElementById('txtAge');
+    txtAge.value = '';
+}
+
 function handleError(errorMessage) {
     console.log(errorMessage);
     alert(errorMessage);
+}
+
+function handleRequestFormatError(errors) {
+    if (errors.age)
+        handleError(errors.age);
+    if (errors.state)
+        handleError(errors.state);
+    if (errors.dateOfBirth)
+        handleError(errors.agedateOfBirth);
 }
